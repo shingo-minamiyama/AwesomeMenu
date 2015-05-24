@@ -16,5 +16,5 @@
     },
     "source_files": "AwesomeMenu/AwesomeMenu/*.{h,m}",
     "resources": "AwesomeMenu/Images/*.png",
-    "requires_arc": false
+    "requires_arc": true
 }
