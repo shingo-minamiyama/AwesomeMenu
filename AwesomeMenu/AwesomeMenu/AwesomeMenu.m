@@ -49,22 +49,29 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 
 #pragma mark - Initialization & Cleaning up
 
+// for autolayout
+- (id) initWithCoder:(NSCoder*)aDecoder{
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initParams];
+        self.startPoint = CGPointMake(self.bounds.origin.x + (self.bounds.size.width / 2), self.bounds.origin.y + (self.bounds.size.height / 2));
+    }
+    return self;
+}
+
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+}
+
+- (void)awakeFromNib{
+}
+
 - (id)initWithFrame:(CGRect)frame startItem:(AwesomeMenuItem*)startItem menuItems:(NSArray *)menuItems
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
-        self.nearRadius = kAwesomeMenuDefaultNearRadius;
-        self.endRadius = kAwesomeMenuDefaultEndRadius;
-        self.farRadius = kAwesomeMenuDefaultFarRadius;
-        self.timeOffset = kAwesomeMenuDefaultTimeOffset;
-        self.rotateAngle = kAwesomeMenuDefaultRotateAngle;
-        self.menuWholeAngle = kAwesomeMenuDefaultMenuWholeAngle;
-        self.startPoint = CGPointMake(kAwesomeMenuDefaultStartPointX, kAwesomeMenuDefaultStartPointY);
-        self.expandRotation = kAwesomeMenuDefaultExpandRotation;
-        self.closeRotation = kAwesomeMenuDefaultCloseRotation;
-        self.animationDuration = kAwesomeMenuDefaultAnimationDuration;
-        self.rotateAddButton = YES;
+        [self initParams];
         
         self.menuItems = menuItems;
         
@@ -80,6 +87,24 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 - (id)initWithFrame:(CGRect)frame startItem:(AwesomeMenuItem*)startItem optionMenus:(NSArray *)aMenusArray
 {
     return [self initWithFrame:frame startItem:startItem menuItems:aMenusArray];
+}
+
+- (void)initParams
+{
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.nearRadius = kAwesomeMenuDefaultNearRadius;
+        self.endRadius = kAwesomeMenuDefaultEndRadius;
+        self.farRadius = kAwesomeMenuDefaultFarRadius;
+        self.timeOffset = kAwesomeMenuDefaultTimeOffset;
+        self.rotateAngle = kAwesomeMenuDefaultRotateAngle;
+        self.menuWholeAngle = kAwesomeMenuDefaultMenuWholeAngle;
+        self.startPoint = CGPointMake(kAwesomeMenuDefaultStartPointX, kAwesomeMenuDefaultStartPointY);
+        self.expandRotation = kAwesomeMenuDefaultExpandRotation;
+        self.closeRotation = kAwesomeMenuDefaultCloseRotation;
+        self.animationDuration = kAwesomeMenuDefaultAnimationDuration;
+        self.rotateAddButton = YES;
+    }
 }
 
 #pragma mark - Getters & Setters
