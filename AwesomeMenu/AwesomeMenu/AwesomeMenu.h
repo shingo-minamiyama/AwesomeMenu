@@ -13,6 +13,8 @@
 
 @interface AwesomeMenu : UIView <AwesomeMenuItemDelegate>
 
+@property (nonatomic, strong) NSString *identifier;
+
 @property (nonatomic, copy) NSArray *menuItems;
 @property (nonatomic, strong) AwesomeMenuItem *startButton;
 
